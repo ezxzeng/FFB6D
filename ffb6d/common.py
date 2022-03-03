@@ -94,6 +94,43 @@ class Config:
             self.ycb_r_lst = list(np.loadtxt(ycb_r_lst_p))
             self.ycb_cls_lst = self.read_lines(self.ycb_cls_lst_p)
             self.ycb_sym_cls_ids = [13, 16, 19, 20, 21]
+        elif self.dataset_name == 'metagraspnet':
+            self.n_objects = 82 + 1  # 82 objects + background
+            self.n_classes = self.n_objects
+            self.use_orbfps = True
+            self.kp_orbfps_dir = 'datasets/metagraspnet/kps/'
+            self.kp_orbfps_ptn = os.path.join(self.kp_orbfps_dir, '%d_%s_kps.txt')
+            self.metagraspnet_cls_lst_p = os.path.abspath(
+                os.path.join(
+                    self.exp_dir, 'datasets/metagraspnet/dataset_config/classes.txt'
+                )
+            )
+            self.metagraspnet_root = os.path.abspath(
+                os.path.join(
+                    self.exp_dir, 'datasets/metagraspnet/metagraspnet'
+                )
+            )
+            self.metagraspnet_kps_dir = os.path.abspath(
+                os.path.join(
+                    self.exp_dir, 'datasets/metagraspnet/kps/'
+                )
+            )
+            metagraspnet_r_lst_p = os.path.abspath(
+                os.path.join(
+                    self.exp_dir, 'datasets/metagraspnet/dataset_config/radius.txt'
+                )
+            )
+            metagraspnet_obj_dict_p = os.path.abspath(
+                os.path.join(
+                    self.exp_dir, 'datasets/metagraspnet/config/obj_dict.json'
+                )
+            )
+
+            self.metagraspnet_r_lst = list(np.loadtxt(ycb_r_lst_p))
+            self.metagraspnet_cls_lst = self.read_lines(self.metagraspnet_cls_lst_p)
+            with open(metagraspnet_obj_dict, "r") as f:
+                self.metagraspnet_obj_dict = json.load(f)
+
         else:  # linemod
             self.n_objects = 1 + 1  # 1 object + background
             self.n_classes = self.n_objects
@@ -152,7 +189,10 @@ class Config:
                                 [0.      , 0.        , 1.0]], np.float32),
             'ycb_K2': np.array([[1077.836, 0.        , 323.7872],
                                 [0.      , 1078.189  , 279.6921],
-                                [0.      , 0.        , 1.0]], np.float32)
+                                [0.      , 0.        , 1.0]], np.float32),
+            'metagraspnet': np.array([[2004.2949249780754, 0, 600],
+                                [0, 2004.2949249780754, 600],
+                                [0, 0, 1]], np.float32)
         }
 
     def read_lines(self, p):
