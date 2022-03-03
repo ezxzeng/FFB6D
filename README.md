@@ -50,6 +50,8 @@ year = {2020}
 ## Demo Video
 See our demo video on [YouTube](https://www.youtube.com/watch?v=SSi2TnyD6Is) or [bilibili](https://www.bilibili.com/video/BV1YU4y1a7Kp?from=search&seid=8306279574921937158).
 ## Installation
+docker build -t ffb6d .
+
 - Install CUDA 10.1 / 10.2
 - Set up python3 environment from requirement.txt:
   ```shell
